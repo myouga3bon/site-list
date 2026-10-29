@@ -105,7 +105,6 @@ footer{margin-top:44px;font-size:12.5px;color:var(--muted)}
     <span class="count" id="count"></span>
     <button class="restore" id="restore" type="button">全部表示</button>
   </div>
-  <p class="hint">□ にチェックを入れると、そのサイトを一覧から隠せます（この端末に記憶されます）。</p>
   <div id="list"></div>
   <p class="empty" id="empty" hidden>該当するサイトがありません。</p>
   <footer>2026年10月29日時点。新しく公開したサイトは、追加を依頼すると一覧に入ります。</footer>
@@ -132,9 +131,9 @@ var DATA=[
   {t:"漢字読みシート",d:"単元ごとの漢字の読み・熟語を確認するシート。",u:"kanji-yomi-sheet/kanji-yomi-sheet.html",tags:["シート"]}
  ]},
  {g:"英語",items:[
-  {t:"Here We Go! 1年 文法ページ",d:"画面で読んで、答えボタンで確かめる中1の文法ページ。2年・3年の目次もあります。",u:"herewego1/",tags:["文法"]},
-  {t:"スマイルプリント【Here We Go】1年",d:"Unit ごとに文法ワークシートを選んで作る印刷用ツール（B5）。",u:"herewego1-bunpou-print/",tags:["印刷","文法"]},
-  {t:"スマイルプリント【Here We Go】2年",d:"2年のUnit 1〜8と Daily Life に対応した文法プリント作成ツール。",u:"herewego2-bunpou-print/",tags:["印刷","文法"]},
+  {t:"イナサト英語オンライン",d:"画面で読んで、答えボタンで確かめる中1の文法ページ。2年・3年の目次もあります。",u:"herewego1/",tags:["文法"]},
+  {t:"スマイルプリント【イナサト英語オンライン】1年",d:"Unit ごとに文法ワークシートを選んで作る印刷用ツール（B5）。",u:"herewego1-bunpou-print/",tags:["印刷","文法"]},
+  {t:"スマイルプリント【イナサト英語オンライン】2年",d:"2年のUnit 1〜8と Daily Life に対応した文法プリント作成ツール。",u:"herewego2-bunpou-print/",tags:["印刷","文法"]},
   {t:"3人称単数みやぶるアプリ",d:"he・she・it に置きかえられるかを、ドラッグゲームとクイズで練習。",u:"sanninsho-tansu/",tags:["ゲーム","文法"]},
   {t:"模試リスニング ファースト",d:"音声をボタンで再生。設問ごとの頭出しと4段階の再生速度つき。",u:"mosi-listening2/",tags:["リスニング"]},
   {t:"模試リスニング セカンド",d:"ファーストと同じ操作でつかえる、第2弾の音源。",u:"mosi-listening2/second/",tags:["リスニング"]}
@@ -152,31 +151,25 @@ function qr(url){
   try{var c=qrcode(0,"M");c.addData(url);c.make();return c.createSvgTag({cellSize:4,margin:0,scalable:true});}catch(e){return "";}
 }
 function esc(s){return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-var KEY="inasato-site-list-hidden",hid=[];
-try{hid=JSON.parse(localStorage.getItem(KEY)||"[]")||[];}catch(e){hid=[];}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(hid));}catch(e){}}
+var hid=[/*DEFAULT_HIDDEN*/],showAll=false;
 var rb=document.getElementById("restore");
-list.addEventListener("change",function(e){
-  var t=e.target;
-  if(t.classList&&t.classList.contains("chk")&&t.checked){hid.push(t.getAttribute("data-u"));save();render();}
-});
-rb.addEventListener("click",function(){hid=[];save();render();});
+rb.addEventListener("click",function(){showAll=!showAll;render();});
 function render(){
   var k=q.value.trim().toLowerCase(),html="",n=0;
   DATA.forEach(function(s){
-    var its=s.items.filter(function(i){return hid.indexOf(i.u)<0&&(!k||(s.g+i.t+i.d+i.tags.join("")).toLowerCase().indexOf(k)>-1)});
+    var its=s.items.filter(function(i){return (showAll||hid.indexOf(i.u)<0)&&(!k||(s.g+i.t+i.d+i.tags.join("")).toLowerCase().indexOf(k)>-1)});
     if(!its.length)return;
     n+=its.length;
     html+='<section><h2>'+esc(s.g)+'<small>'+its.length+'件</small></h2><div class="grid">';
     its.forEach(function(i){
-      html+='<div class="item"><input type="checkbox" class="chk" data-u="'+esc(i.u)+'" aria-label="'+esc(i.t)+'を非表示にする"><a class="card" href="'+B+i.u+'" target="_blank" rel="noopener"><span class="body"><span class="t">'+esc(i.t)+'</span><span class="d">'+esc(i.d)+'</span><span class="meta">'+
+      html+='<div class="item"><a class="card" href="'+B+i.u+'" target="_blank" rel="noopener"><span class="body"><span class="t">'+esc(i.t)+'</span><span class="d">'+esc(i.d)+'</span><span class="meta">'+
         i.tags.map(function(t){return '<span class="tag">'+esc(t)+'</span>'}).join("")+
         '<span class="url">'+esc(i.u.replace(/\/$/,""))+'</span></span></span><span class="qr" aria-label="QRコード">'+qr(B+i.u)+'</span></a></div>';
     });
     html+='</div></section>';
   });
   list.innerHTML=html;cnt.textContent=n+"件";emp.hidden=n>0;
-  rb.title=hid.length?("非表示 "+hid.length+"件をすべて表示"):"非表示のサイトはありません";rb.style.opacity=hid.length?"1":".5";
+  rb.hidden=hid.length===0;rb.textContent=showAll?"元に戻す":"全部表示";
 }
 q.addEventListener("input",render);render();
 </script>
