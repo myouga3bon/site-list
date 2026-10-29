@@ -151,7 +151,7 @@ function qr(url){
   try{var c=qrcode(0,"M");c.addData(url);c.make();return c.createSvgTag({cellSize:4,margin:0,scalable:true});}catch(e){return "";}
 }
 function esc(s){return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-var hid=[/*DEFAULT_HIDDEN*/],showAll=false;
+var hid=["rekishi-masupuri1/","rekishi-masupuri-smart/","uonzu/","suujibunruigame/","radian-drill/radian-drill.html","kanji-yomi-sheet/kanji-yomi-sheet.html","herewego2-bunpou-print/","herewego1-bunpou-print/","sanninsho-tansu/","mosi-listening2/second/","kuchikomi-guide/","mendan-sheet/index.html.html","rekishimasupuri04/"],showAll=false;
 var rb=document.getElementById("restore");
 rb.addEventListener("click",function(){showAll=!showAll;render();});
 function render(){
