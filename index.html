@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>教材サイト一覧</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+/* Layout: 見出し→検索→教科ごとのリンクカード（2列、スマホは1列） */
+:root{
+  --bg:#f4f5f2;
+  --surface:#ffffff;
+  --ink:#24272b;
+  --muted:#656b72;
+  --line:#dfe2dc;
+  --accent:#d9631e;
+  --accent-soft:#fbe6d6;
+  --chip:#eceee9;
+  --blue:#8fbfe8;
+  --blue-soft:#e3f0fb;
+  --f-display:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;
+  --f-body:"Noto Sans JP","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1b1d1f;--surface:#25282b;--ink:#eceeea;--muted:#a1a7ad;--line:#3a3e42;
+    --accent:#f0924f;--accent-soft:#40291a;--chip:#303438;--blue:#5d8fb8;--blue-soft:#243645;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1b1d1f;--surface:#25282b;--ink:#eceeea;--muted:#a1a7ad;--line:#3a3e42;
+  --accent:#f0924f;--accent-soft:#40291a;--chip:#303438;--blue:#5d8fb8;--blue-soft:#243645;color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.7;
+  padding-block:32px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+.wrap{max-width:880px;margin:0 auto}
+.school{
+  display:inline-block;font-family:var(--f-display);font-weight:700;font-size:13px;
+  color:var(--accent);background:var(--accent-soft);padding:3px 12px;border-radius:999px;letter-spacing:.06em;
+}
+h1{font-family:var(--f-display);font-size:clamp(28px,6vw,38px);line-height:1.25;margin:12px 0 6px;text-wrap:balance}
+.lead{color:var(--muted);margin:0 0 20px}
+.search{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.search input{
+  flex:1 1 220px;min-width:0;font:inherit;color:var(--ink);background:var(--surface);
+  border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;
+}
+.search input:focus-visible{outline:3px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.count{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+section{margin-top:34px}
+section h2{
+  font-family:var(--f-display);font-size:19px;margin:0 0 12px;padding-bottom:8px;
+  border-bottom:2px solid var(--line);display:flex;align-items:baseline;gap:10px;
+}
+section h2 small{font-family:var(--f-body);font-weight:400;font-size:12px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,380px),1fr));gap:12px}
+.card{
+  display:flex;flex-direction:row;gap:14px;align-items:flex-start;min-width:0;text-decoration:none;color:inherit;
+  background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;
+  transition:border-color .15s,transform .15s;
+}
+.item{display:flex;gap:10px;align-items:flex-start;min-width:0}
+.item .card{flex:1}
+.chk{
+  appearance:none;-webkit-appearance:none;flex:none;width:26px;height:26px;margin:14px 0 0;cursor:pointer;
+  border:2px solid var(--blue);background:var(--blue-soft);border-radius:7px;
+}
+.chk:hover{border-color:var(--accent)}
+.chk:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.chk:checked{background:var(--accent);border-color:var(--accent)}
+.restore{
+  font:inherit;font-size:13px;color:var(--ink);background:var(--surface);cursor:pointer;
+  border:1.5px solid var(--line);border-radius:999px;padding:6px 14px;
+}
+.restore:hover{border-color:var(--accent)}
+.hint{font-size:12.5px;color:var(--muted);margin:0 0 4px}
+.body{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.qr{flex:none;width:92px;height:92px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:5px}
+.qr svg{display:block;width:100%;height:100%}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.card .t{font-family:var(--f-display);font-weight:700;font-size:16.5px;line-height:1.4}
+.card .d{font-size:13.5px;color:var(--muted);line-height:1.55}
+.card .meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px}
+.tag{font-size:11.5px;background:var(--chip);color:var(--muted);padding:1px 9px;border-radius:999px}
+.url{font-family:var(--f-mono);font-size:11px;color:var(--muted);overflow-wrap:anywhere;margin-left:auto}
+.empty{margin-top:28px;color:var(--muted)}
+footer{margin-top:44px;font-size:12.5px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+</style>
+</head><body>
+
+<div class="wrap">
+  <span class="school">学習空間 稲里教室</span>
+  <h1>教材サイト一覧</h1>
+  <p class="lead">GitHub Pages に公開している教材アプリと配布ページです。タップすると新しいタブで開きます。</p>
+  <div class="search">
+    <input id="q" type="search" placeholder="サイト名で絞りこむ（例：歴史、英語、文化）" aria-label="サイトを絞りこむ">
+    <span class="count" id="count"></span>
+    <button class="restore" id="restore" type="button" hidden></button>
+  </div>
+  <p class="hint">□ にチェックを入れると、そのサイトを一覧から隠せます（この端末に記憶されます）。</p>
+  <div id="list"></div>
+  <p class="empty" id="empty" hidden>該当するサイトがありません。</p>
+  <footer>2026年10月29日時点。新しく公開したサイトは、追加を依頼すると一覧に入ります。</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+var B="https://myouga3bon.github.io/";
+var DATA=[
+ {g:"社会",items:[
+  {t:"公民マスプリテスト",d:"公民の空欄式チェックテスト。スマホにインストールして使えます。",u:"koumin-masupuri/koumin-masupuri.html",tags:["スマホアプリ"]},
+  {t:"歴史マスプリテスト",d:"歴史の空欄式チェックテスト。時代とレベルを選んで出題します。",u:"rekishi-kuran-test/rekishi-kuran.html",tags:["スマホアプリ"]},
+  {t:"歴史マスターテスト（印刷用）",d:"時代×レベルで問題を作り、A4で印刷できる歴史テスト。",u:"rekishimasupuri04/",tags:["印刷"]},
+  {t:"歴史マスターテスト（初期版）",d:"問題数と範囲を選ぶ、歴史マスターテストの旧版です。",u:"rekishi-masupuri1/",tags:["印刷","旧版"]},
+  {t:"歴史マスターテスト（シンプルスマホ版）",d:"レベル1・2の範囲から出題する、画面表示だけのスマホ版。",u:"rekishi-masupuri-smart/",tags:["スマホ"]},
+  {t:"雨温図クイズ（ファースト）",d:"雨温図を見て日本の気候区分を選ぶクイズ。",u:"uonzu/",tags:["クイズ"]},
+  {t:"雨温図クイズ（セカンド）",d:"ステージ制になった雨温図クイズの第2弾。",u:"uonzu2/",tags:["クイズ"]}
+ ]},
+ {g:"数学",items:[
+  {t:"数字分類マスターゲーム",d:"お題に合う数をすべて選ぶ、中学1年の数の分類ゲーム。",u:"suujibunruigame/",tags:["ゲーム"]},
+  {t:"弧度法ドリル",d:"単位円ゲーム、度とラジアンの変換、sin・cos・tanの練習。",u:"radian-drill/radian-drill.html",tags:["ドリル"]}
+ ]},
+ {g:"国語",items:[
+  {t:"漢字読みシート",d:"単元ごとの漢字の読み・熟語を確認するシート。",u:"kanji-yomi-sheet/kanji-yomi-sheet.html",tags:["シート"]}
+ ]},
+ {g:"英語",items:[
+  {t:"Here We Go! 1年 文法ページ",d:"画面で読んで、答えボタンで確かめる中1の文法ページ。2年・3年の目次もあります。",u:"herewego1/",tags:["文法"]},
+  {t:"スマイルプリント【Here We Go】1年",d:"Unit ごとに文法ワークシートを選んで作る印刷用ツール（B5）。",u:"herewego1-bunpou-print/",tags:["印刷","文法"]},
+  {t:"スマイルプリント【Here We Go】2年",d:"2年のUnit 1〜8と Daily Life に対応した文法プリント作成ツール。",u:"herewego2-bunpou-print/",tags:["印刷","文法"]},
+  {t:"3人称単数みやぶるアプリ",d:"he・she・it に置きかえられるかを、ドラッグゲームとクイズで練習。",u:"sanninsho-tansu/",tags:["ゲーム","文法"]},
+  {t:"模試リスニング ファースト",d:"音声をボタンで再生。設問ごとの頭出しと4段階の再生速度つき。",u:"mosi-listening2/",tags:["リスニング"]},
+  {t:"模試リスニング セカンド",d:"ファーストと同じ操作でつかえる、第2弾の音源。",u:"mosi-listening2/second/",tags:["リスニング"]}
+ ]},
+ {g:"入試・保護者向け",items:[
+  {t:"文化学園長野高校 学力検査 過去問",d:"12月S日程・1月A日程の過去問を画面で見られるサイト。",u:"bunka-kakomon-honpen/",tags:["過去問"]},
+  {t:"文化学園長野高校 過去問解説",d:"過去問サイトと行き来できる解説サイト。",u:"bunka-kakomon-kaisetsu/",tags:["解説"]},
+  {t:"長野私立高校 入試・見学ガイド",d:"私立高校6校の入試日程、学校見学会、模試の予定。",u:"shiritsu-nyushi/",tags:["保護者向け"]},
+  {t:"Google口コミ投稿のお願いと方法",d:"アカウントの作り方から投稿までを順に案内するページ。",u:"kuchikomi-guide/",tags:["保護者向け"]},
+  {t:"面談シート",d:"面談で使うシート。",u:"mendan-sheet/index.html.html",tags:["シート"]}
+ ]}
+];
+var list=document.getElementById("list"),q=document.getElementById("q"),cnt=document.getElementById("count"),emp=document.getElementById("empty");
+function qr(url){
+  try{var c=qrcode(0,"M");c.addData(url);c.make();return c.createSvgTag({cellSize:4,margin:0,scalable:true});}catch(e){return "";}
+}
+function esc(s){return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var KEY="inasato-site-list-hidden",hid=[];
+try{hid=JSON.parse(localStorage.getItem(KEY)||"[]")||[];}catch(e){hid=[];}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(hid));}catch(e){}}
+var rb=document.getElementById("restore");
+list.addEventListener("change",function(e){
+  var t=e.target;
+  if(t.classList&&t.classList.contains("chk")&&t.checked){hid.push(t.getAttribute("data-u"));save();render();}
+});
+rb.addEventListener("click",function(){hid=[];save();render();});
+function render(){
+  var k=q.value.trim().toLowerCase(),html="",n=0;
+  DATA.forEach(function(s){
+    var its=s.items.filter(function(i){return hid.indexOf(i.u)<0&&(!k||(s.g+i.t+i.d+i.tags.join("")).toLowerCase().indexOf(k)>-1)});
+    if(!its.length)return;
+    n+=its.length;
+    html+='<section><h2>'+esc(s.g)+'<small>'+its.length+'件</small></h2><div class="grid">';
+    its.forEach(function(i){
+      html+='<div class="item"><input type="checkbox" class="chk" data-u="'+esc(i.u)+'" aria-label="'+esc(i.t)+'を非表示にする"><a class="card" href="'+B+i.u+'" target="_blank" rel="noopener"><span class="body"><span class="t">'+esc(i.t)+'</span><span class="d">'+esc(i.d)+'</span><span class="meta">'+
+        i.tags.map(function(t){return '<span class="tag">'+esc(t)+'</span>'}).join("")+
+        '<span class="url">'+esc(i.u.replace(/\/$/,""))+'</span></span></span><span class="qr" aria-label="QRコード">'+qr(B+i.u)+'</span></a></div>';
+    });
+    html+='</div></section>';
+  });
+  list.innerHTML=html;cnt.textContent=n+"件";emp.hidden=n>0;
+  rb.hidden=hid.length===0;rb.textContent="非表示 "+hid.length+"件を元に戻す";
+}
+q.addEventListener("input",render);render();
+</script>
+</body></html>
