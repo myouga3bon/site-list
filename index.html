@@ -127,7 +127,11 @@ var DATA=[
   {t:"歴史マスターテスト（初期版）",d:"問題数と範囲を選ぶ、歴史マスターテストの旧版です。",u:"rekishi-masupuri1/",tags:["印刷","旧版"]},
   {t:"歴史マスターテスト（シンプルスマホ版）",d:"レベル1・2の範囲から出題する、画面表示だけのスマホ版。",u:"rekishi-masupuri-smart/",tags:["スマホ"]},
   {t:"雨温図クイズ（ファースト）",d:"雨温図を見て日本の気候区分を選ぶクイズ。",u:"uonzu/",tags:["クイズ"]},
-  {t:"雨温図クイズ（セカンド）",d:"ステージ制になった雨温図クイズの第2弾。",u:"uonzu2/",tags:["クイズ"]}
+  {t:"雨温図クイズ（セカンド）",d:"ステージ制になった雨温図クイズの第2弾。",u:"uonzu2/",tags:["クイズ"]},
+  {t:"社会カコモン類題トレーニング",d:"地理・歴史・公民の類題トレーニング。記述は作成中です。",u:"gyosha-kakomon/shakai/",tags:["スマホアプリ"]}
+ ]},
+ {g:"理科",items:[
+  {t:"理科カコモン類題トレーニング",d:"生物・地学・化学・物理の全43単元。解いたら「解説を見る」で答えとポイントを確認できます。",u:"gyosha-kakomon/rika/",tags:["スマホアプリ"]}
  ]},
  {g:"数学",items:[
   {t:"数字分類マスターゲーム",d:"お題に合う数をすべて選ぶ、中学1年の数の分類ゲーム。",u:"suujibunruigame/",tags:["ゲーム"]},
@@ -164,7 +168,7 @@ function qr(url){
   try{var c=qrcode(0,"M");c.addData(url);c.make();return c.createSvgTag({cellSize:4,margin:0,scalable:true});}catch(e){return "";}
 }
 function esc(s){return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-var hid=["rekishi-masupuri1/","rekishi-masupuri-smart/","uonzu/","suujibunruigame/","radian-drill/radian-drill.html","kanji-yomi-sheet/kanji-yomi-sheet.html","herewego2-bunpou-print/","herewego1-bunpou-print/","sanninsho-tansu/","mosi-listening2/second/","kuchikomi-guide/","mendan-sheet/index.html.html","rekishimasupuri04/","inasato-goi-tore/","kanji-teisei/kanji-teisei.html","kobun-drill/","slash-reading/","target1900-quiz/","josai-yaku-sugaku/","josai-yaku-sugaku/eigo.html"],showAll=false;
+var hid=["rekishi-masupuri1/","rekishi-masupuri-smart/","uonzu/","suujibunruigame/","radian-drill/radian-drill.html","kanji-yomi-sheet/kanji-yomi-sheet.html","herewego2-bunpou-print/","herewego1-bunpou-print/","sanninsho-tansu/","mosi-listening2/second/","kuchikomi-guide/","mendan-sheet/index.html.html","rekishimasupuri04/","inasato-goi-tore/","kanji-teisei/kanji-teisei.html","kobun-drill/","slash-reading/","target1900-quiz/","josai-yaku-sugaku/","josai-yaku-sugaku/eigo.html","gyosha-kakomon/rika/","gyosha-kakomon/shakai/"],showAll=false;
 var rb=document.getElementById("restore");
 rb.addEventListener("click",function(){showAll=!showAll;render();});
 function render(){
