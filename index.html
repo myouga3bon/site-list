@@ -112,7 +112,7 @@ footer{margin-top:44px;font-size:12.5px;color:var(--muted)}
   </div>
   <div id="list"></div>
   <p class="empty" id="empty" hidden>該当するサイトがありません。</p>
-  <footer>2026年10月31日時点。新しく公開したサイトは、追加を依頼すると一覧に入ります。</footer>
+  <footer>2026年11月15日時点。新しく公開したサイトは、追加を依頼すると一覧に入ります。</footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
@@ -134,7 +134,10 @@ var DATA=[
   {t:"弧度法ドリル",d:"単位円ゲーム、度とラジアンの変換、sin・cos・tanの練習。",u:"radian-drill/radian-drill.html",tags:["ドリル"]}
  ]},
  {g:"国語",items:[
-  {t:"漢字読みシート",d:"単元ごとの漢字の読み・熟語を確認するシート。",u:"kanji-yomi-sheet/kanji-yomi-sheet.html",tags:["シート"]}
+  {t:"漢字読みシート",d:"単元ごとの漢字の読み・熟語を確認するシート。",u:"kanji-yomi-sheet/kanji-yomi-sheet.html",tags:["シート"]},
+  {t:"イナサト語彙トレ",d:"説明文・物語文の言葉の意味を答える語彙の実力テスト。小学生〜中学生向け。",u:"inasato-goi-tore/",tags:["テスト"]},
+  {t:"漢字訂正テスト",d:"文の中のまちがった漢字をタップして、正しい漢字を書くテスト。1回10問・全10回。",u:"kanji-teisei/kanji-teisei.html",tags:["スマホアプリ"]},
+  {t:"古文単語ドリル",d:"『重要古文単語315』準拠。範囲・出題数・解答モードを選べる六択ドリル。",u:"kobun-drill/",tags:["スマホアプリ"]}
  ]},
  {g:"英語",items:[
   {t:"イナサト英語オンライン",d:"画面で読んで、答えボタンで確かめる中1の文法ページ。2年・3年の目次もあります。",u:"herewego1/",tags:["文法"]},
@@ -142,14 +145,18 @@ var DATA=[
   {t:"スマイルプリント【イナサト英語オンライン】2年",d:"2年のUnit 1〜8と Daily Life に対応した文法プリント作成ツール。",u:"herewego2-bunpou-print/",tags:["印刷","文法"]},
   {t:"3人称単数みやぶるアプリ",d:"he・she・it に置きかえられるかを、ドラッグゲームとクイズで練習。",u:"sanninsho-tansu/",tags:["ゲーム","文法"]},
   {t:"模試リスニング ファースト",d:"音声をボタンで再生。設問ごとの頭出しと4段階の再生速度つき。",u:"mosi-listening2/",tags:["リスニング"]},
-  {t:"模試リスニング セカンド",d:"ファーストと同じ操作でつかえる、第2弾の音源。",u:"mosi-listening2/second/",tags:["リスニング"]}
+  {t:"模試リスニング セカンド",d:"ファーストと同じ操作でつかえる、第2弾の音源。",u:"mosi-listening2/second/",tags:["リスニング"]},
+  {t:"フリックリーディング",d:"短い英文を区切りながら練習するリーディングアプリ。単語のストックつき。",u:"slash-reading/",tags:["スマホアプリ"]},
+  {t:"ターゲット1900 単語テスト",d:"『英単語ターゲット1900』[6訂版]準拠。六択でテンポよく復習する単語テスト。",u:"target1900-quiz/",tags:["スマホアプリ"]}
  ]},
  {g:"入試・保護者向け",items:[
   {t:"文化学園長野高校 学力検査 過去問",d:"12月S日程・1月A日程の過去問を画面で見られるサイト。",u:"bunka-kakomon-honpen/",tags:["過去問"]},
   {t:"文化学園長野高校 過去問解説",d:"過去問サイトと行き来できる解説サイト。",u:"bunka-kakomon-kaisetsu/",tags:["解説"]},
   {t:"長野私立高校 入試・見学ガイド",d:"私立高校6校の入試日程、学校見学会、模試の予定。",u:"shiritsu-nyushi/",tags:["保護者向け"]},
   {t:"Google口コミ投稿のお願いと方法",d:"アカウントの作り方から投稿までを順に案内するページ。",u:"kuchikomi-guide/",tags:["保護者向け"]},
-  {t:"面談シート",d:"面談で使うシート。",u:"mendan-sheet/index.html.html",tags:["シート"]}
+  {t:"面談シート",d:"面談で使うシート。",u:"mendan-sheet/index.html.html",tags:["シート"]},
+  {t:"城西大学 薬学部 数学 過去問＆解説",d:"一般選抜の数学の過去問と解説。",u:"josai-yaku-sugaku/",tags:["過去問"]},
+  {t:"城西大学 薬学部 英語 過去問＆解説",d:"一般選抜の英語の過去問と解説。",u:"josai-yaku-sugaku/eigo.html",tags:["過去問"]}
  ]}
 ];
 var list=document.getElementById("list"),q=document.getElementById("q"),cnt=document.getElementById("count"),emp=document.getElementById("empty");
@@ -157,7 +164,7 @@ function qr(url){
   try{var c=qrcode(0,"M");c.addData(url);c.make();return c.createSvgTag({cellSize:4,margin:0,scalable:true});}catch(e){return "";}
 }
 function esc(s){return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-var hid=["rekishi-masupuri1/","rekishi-masupuri-smart/","uonzu/","suujibunruigame/","radian-drill/radian-drill.html","kanji-yomi-sheet/kanji-yomi-sheet.html","herewego2-bunpou-print/","herewego1-bunpou-print/","sanninsho-tansu/","mosi-listening2/second/","kuchikomi-guide/","mendan-sheet/index.html.html","rekishimasupuri04/"],showAll=false;
+var hid=["rekishi-masupuri1/","rekishi-masupuri-smart/","uonzu/","suujibunruigame/","radian-drill/radian-drill.html","kanji-yomi-sheet/kanji-yomi-sheet.html","herewego2-bunpou-print/","herewego1-bunpou-print/","sanninsho-tansu/","mosi-listening2/second/","kuchikomi-guide/","mendan-sheet/index.html.html","rekishimasupuri04/","inasato-goi-tore/","kanji-teisei/kanji-teisei.html","kobun-drill/","slash-reading/","target1900-quiz/","josai-yaku-sugaku/","josai-yaku-sugaku/eigo.html"],showAll=false;
 var rb=document.getElementById("restore");
 rb.addEventListener("click",function(){showAll=!showAll;render();});
 function render(){
