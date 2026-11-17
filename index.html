@@ -112,7 +112,7 @@ footer{margin-top:44px;font-size:12.5px;color:var(--muted)}
   </div>
   <div id="list"></div>
   <p class="empty" id="empty" hidden>該当するサイトがありません。</p>
-  <footer>2026年11月15日時点。新しく公開したサイトは、追加を依頼すると一覧に入ります。</footer>
+  <footer>2026年11月17日時点。新しく公開したサイトは、追加を依頼すると一覧に入ります。</footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
@@ -156,6 +156,7 @@ var DATA=[
  {g:"入試・保護者向け",items:[
   {t:"文化学園長野高校 学力検査 過去問",d:"12月S日程・1月A日程の過去問を画面で見られるサイト。",u:"bunka-kakomon-honpen/",tags:["過去問"]},
   {t:"文化学園長野高校 過去問解説",d:"過去問サイトと行き来できる解説サイト。",u:"bunka-kakomon-kaisetsu/",tags:["解説"]},
+  {t:"文化学園長野高校 設問別対策",d:"学力検査を設問別に対策するページ。過去問サイト・解説サイトとも行き来できます。",u:"bunka-kakomon-honpen/taisaku.html",tags:["対策"]},
   {t:"長野私立高校 入試・見学ガイド",d:"私立高校6校の入試日程、学校見学会、模試の予定。",u:"shiritsu-nyushi/",tags:["保護者向け"]},
   {t:"Google口コミ投稿のお願いと方法",d:"アカウントの作り方から投稿までを順に案内するページ。",u:"kuchikomi-guide/",tags:["保護者向け"]},
   {t:"面談シート",d:"面談で使うシート。",u:"mendan-sheet/index.html.html",tags:["シート"]},
@@ -168,7 +169,7 @@ function qr(url){
   try{var c=qrcode(0,"M");c.addData(url);c.make();return c.createSvgTag({cellSize:4,margin:0,scalable:true});}catch(e){return "";}
 }
 function esc(s){return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-var hid=["rekishi-masupuri1/","rekishi-masupuri-smart/","uonzu/","suujibunruigame/","radian-drill/radian-drill.html","kanji-yomi-sheet/kanji-yomi-sheet.html","herewego2-bunpou-print/","herewego1-bunpou-print/","sanninsho-tansu/","mosi-listening2/second/","kuchikomi-guide/","mendan-sheet/index.html.html","rekishimasupuri04/","inasato-goi-tore/","kanji-teisei/kanji-teisei.html","kobun-drill/","slash-reading/","target1900-quiz/","josai-yaku-sugaku/","josai-yaku-sugaku/eigo.html","gyosha-kakomon/rika/","gyosha-kakomon/shakai/"],showAll=false;
+var hid=["rekishi-masupuri1/","rekishi-masupuri-smart/","uonzu/","suujibunruigame/","radian-drill/radian-drill.html","kanji-yomi-sheet/kanji-yomi-sheet.html","herewego2-bunpou-print/","herewego1-bunpou-print/","sanninsho-tansu/","mosi-listening2/second/","kuchikomi-guide/","mendan-sheet/index.html.html","rekishimasupuri04/","inasato-goi-tore/","kanji-teisei/kanji-teisei.html","kobun-drill/","slash-reading/","target1900-quiz/","josai-yaku-sugaku/","josai-yaku-sugaku/eigo.html","gyosha-kakomon/rika/","gyosha-kakomon/shakai/","bunka-kakomon-honpen/taisaku.html"],showAll=false;
 var rb=document.getElementById("restore");
 rb.addEventListener("click",function(){showAll=!showAll;render();});
 function render(){
