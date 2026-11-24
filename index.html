@@ -112,7 +112,7 @@ footer{margin-top:44px;font-size:12.5px;color:var(--muted)}
   </div>
   <div id="list"></div>
   <p class="empty" id="empty" hidden>該当するサイトがありません。</p>
-  <footer>2026年11月17日時点。新しく公開したサイトは、追加を依頼すると一覧に入ります。</footer>
+  <footer>2026年11月24日時点。新しく公開したサイトは、追加を依頼すると一覧に入ります。</footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
@@ -141,7 +141,8 @@ var DATA=[
   {t:"漢字読みシート",d:"単元ごとの漢字の読み・熟語を確認するシート。",u:"kanji-yomi-sheet/kanji-yomi-sheet.html",tags:["シート"]},
   {t:"イナサト語彙トレ",d:"説明文・物語文の言葉の意味を答える語彙の実力テスト。小学生〜中学生向け。",u:"inasato-goi-tore/",tags:["テスト"]},
   {t:"漢字訂正テスト",d:"文の中のまちがった漢字をタップして、正しい漢字を書くテスト。1回10問・全10回。",u:"kanji-teisei/kanji-teisei.html",tags:["スマホアプリ"]},
-  {t:"古文単語ドリル",d:"『重要古文単語315』準拠。範囲・出題数・解答モードを選べる六択ドリル。",u:"kobun-drill/",tags:["スマホアプリ"]}
+  {t:"古文単語ドリル",d:"『重要古文単語315』準拠。範囲・出題数・解答モードを選べる六択ドリル。",u:"kobun-drill/",tags:["スマホアプリ"]},
+  {t:"いろはに古単",d:"『古文単語330 Key＆Point』四訂版準拠。範囲・出題数・解答モードを選べる六択ドリル。",u:"irohani-kotan/",tags:["スマホアプリ"]}
  ]},
  {g:"英語",items:[
   {t:"イナサト英語オンライン",d:"画面で読んで、答えボタンで確かめる中1の文法ページ。2年・3年の目次もあります。",u:"herewego1/",tags:["文法"]},
@@ -151,7 +152,8 @@ var DATA=[
   {t:"模試リスニング ファースト",d:"音声をボタンで再生。設問ごとの頭出しと4段階の再生速度つき。",u:"mosi-listening2/",tags:["リスニング"]},
   {t:"模試リスニング セカンド",d:"ファーストと同じ操作でつかえる、第2弾の音源。",u:"mosi-listening2/second/",tags:["リスニング"]},
   {t:"フリックリーディング",d:"短い英文を区切りながら練習するリーディングアプリ。単語のストックつき。",u:"slash-reading/",tags:["スマホアプリ"]},
-  {t:"ターゲット1900 単語テスト",d:"『英単語ターゲット1900』[6訂版]準拠。六択でテンポよく復習する単語テスト。",u:"target1900-quiz/",tags:["スマホアプリ"]}
+  {t:"ターゲット1900 単語テスト",d:"『英単語ターゲット1900』[6訂版]準拠。六択でテンポよく復習する単語テスト。",u:"target1900-quiz/",tags:["スマホアプリ"]},
+  {t:"LEAP 単語テスト",d:"『必携英単語 LEAP』改訂版準拠。範囲・出題数・解答モードを選べる六択の単語テスト。",u:"leap-quiz/",tags:["スマホアプリ"]}
  ]},
  {g:"入試・保護者向け",items:[
   {t:"文化学園長野高校 学力検査 過去問",d:"12月S日程・1月A日程の過去問を画面で見られるサイト。",u:"bunka-kakomon-honpen/",tags:["過去問"]},
@@ -169,7 +171,7 @@ function qr(url){
   try{var c=qrcode(0,"M");c.addData(url);c.make();return c.createSvgTag({cellSize:4,margin:0,scalable:true});}catch(e){return "";}
 }
 function esc(s){return s.replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-var hid=["rekishi-masupuri1/","rekishi-masupuri-smart/","uonzu/","suujibunruigame/","radian-drill/radian-drill.html","kanji-yomi-sheet/kanji-yomi-sheet.html","herewego2-bunpou-print/","herewego1-bunpou-print/","sanninsho-tansu/","mosi-listening2/second/","kuchikomi-guide/","mendan-sheet/index.html.html","rekishimasupuri04/","inasato-goi-tore/","kanji-teisei/kanji-teisei.html","kobun-drill/","slash-reading/","target1900-quiz/","josai-yaku-sugaku/","josai-yaku-sugaku/eigo.html","gyosha-kakomon/rika/","gyosha-kakomon/shakai/","bunka-kakomon-honpen/taisaku.html"],showAll=false;
+var hid=["rekishi-masupuri1/","rekishi-masupuri-smart/","uonzu/","suujibunruigame/","radian-drill/radian-drill.html","kanji-yomi-sheet/kanji-yomi-sheet.html","herewego2-bunpou-print/","herewego1-bunpou-print/","sanninsho-tansu/","mosi-listening2/second/","kuchikomi-guide/","mendan-sheet/index.html.html","rekishimasupuri04/","inasato-goi-tore/","kanji-teisei/kanji-teisei.html","kobun-drill/","slash-reading/","target1900-quiz/","josai-yaku-sugaku/","josai-yaku-sugaku/eigo.html","gyosha-kakomon/rika/","gyosha-kakomon/shakai/","bunka-kakomon-honpen/taisaku.html","irohani-kotan/","leap-quiz/"],showAll=false;
 var rb=document.getElementById("restore");
 rb.addEventListener("click",function(){showAll=!showAll;render();});
 function render(){
